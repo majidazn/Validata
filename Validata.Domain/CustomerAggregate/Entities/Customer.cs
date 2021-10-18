@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Validata.Common.Domain.SeedWork;
 
 namespace Validata.Domain.CustomerAggregate.Entities
 {
-    public class Customer
+    public class Customer: Entity, IAggregateRoot
     {
         #region Constructor
-        private Customer()
+        private Customer(string firstName, string lastName, string address, string postalCode)
         {
-
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            PostalCode = postalCode;
         }
         #endregion
 
