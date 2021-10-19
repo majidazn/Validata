@@ -92,6 +92,12 @@ namespace Validata.Common.Domain.SeedWork
             return !(left == right);
         }
 
-     
+        protected static void CheckRule(IBusinessRule rule)
+        {
+            if (rule.IsBroken())
+            {
+                throw new Exception(rule.Message);
+            }
+        }
     }
 }
