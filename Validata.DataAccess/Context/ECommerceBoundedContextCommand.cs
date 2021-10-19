@@ -5,12 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Validata.Common.Enums;
+using Validata.DataAccess.Configurations.Customer;
+using Validata.DataAccess.Configurations.Order;
+using Validata.DataAccess.Configurations.Product;
 using Validata.Domain.CustomerAggregate.Entities;
 using Validata.Domain.OrderAggregate.Entities;
 using Validata.Domain.ProductAggregate.Entities;
 
 namespace Validata.DataAccess.Context
 {
+    // Add-Migration init -Project src\Infrastrutures\DataAccess\Validata.DataAccess -Context ECommerceBoundedContextCommand
+
     public class ECommerceBoundedContextCommand : DbContext
     {
         public ECommerceBoundedContextCommand(DbContextOptions<ECommerceBoundedContextCommand> options,
@@ -36,7 +42,17 @@ namespace Validata.DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.ApplyConfiguration(new CenterConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+
+
+
+            modelBuilder.Entity<Customer>().HasQueryFilter(p => p.Status != EntityStateType.Deleted);
+            modelBuilder.Entity<Order>().HasQueryFilter(p => p.Status != EntityStateType.Deleted);
+            modelBuilder.Entity<OrderItem>().HasQueryFilter(p => p.Status != EntityStateType.Deleted);
+            modelBuilder.Entity<Product>().HasQueryFilter(p => p.Status != EntityStateType.Deleted);
         }
     }
 }

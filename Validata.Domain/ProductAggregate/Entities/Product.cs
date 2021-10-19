@@ -12,6 +12,10 @@ namespace Validata.Domain.ProductAggregate.Entities
     public class Product : Entity, IAggregateRoot
     {
         #region Constructor
+        public Product()
+        {
+
+        }
         private Product(string name, decimal price)
         {
             Name = name;

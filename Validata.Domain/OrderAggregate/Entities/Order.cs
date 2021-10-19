@@ -13,6 +13,10 @@ namespace Validata.Domain.OrderAggregate.Entities
     public class Order : Entity, IAggregateRoot
     {
         #region Constructor
+        public Order()
+        {
+
+        }
         private Order(int customerId, DateTime orderDate, decimal totalPrice)
         {
             CustomerId = customerId;

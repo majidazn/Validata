@@ -11,6 +11,10 @@ namespace Validata.Domain.OrderAggregate.Entities
     public class OrderItem : Entity
     {
         #region Constructor
+        public OrderItem()
+        {
+
+        }
         private OrderItem(int productId, int quantity, int orderId)
         {
             ProductId = productId;

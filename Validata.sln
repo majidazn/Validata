@@ -19,13 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validata.WebApi.Framework", "Validata.WebApi.Framework\Validata.WebApi.Framework.csproj", "{A25BB331-1873-4D87-A6D9-5C398E8EA54D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validata.Common", "Validata.Common\Validata.Common.csproj", "{82EF5605-A9C4-43A0-8DA3-DEE3AF6344E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validata.Common", "Validata.Common\Validata.Common.csproj", "{82EF5605-A9C4-43A0-8DA3-DEE3AF6344E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validata.ApplicationServices", "Validata.ApplicationServices\Validata.ApplicationServices.csproj", "{77F40116-0CCF-4537-9BC6-E52C2453EF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validata.ApplicationServices", "Validata.ApplicationServices\Validata.ApplicationServices.csproj", "{77F40116-0CCF-4537-9BC6-E52C2453EF4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validata.DataAccess", "Validata.DataAccess\Validata.DataAccess.csproj", "{FDB4B519-0D34-4B72-A299-F4FCF354746A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validata.DataAccess", "Validata.DataAccess\Validata.DataAccess.csproj", "{FDB4B519-0D34-4B72-A299-F4FCF354746A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validata.WebApi", "Validata.WebApi\Validata.WebApi.csproj", "{2D10E0B6-9528-4149-8CA4-0A1B5C02D05E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validata.WebApi", "Validata.WebApi\Validata.WebApi.csproj", "{2D10E0B6-9528-4149-8CA4-0A1B5C02D05E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

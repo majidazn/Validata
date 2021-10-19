@@ -13,6 +13,12 @@ namespace Validata.Domain.CustomerAggregate.Entities
     public class Customer: Entity, IAggregateRoot
     {
         #region Constructor
+
+        public Customer()
+        {
+
+        }
+
         private Customer(string firstName, string lastName, string address, string postalCode)
         {
             FirstName = firstName;

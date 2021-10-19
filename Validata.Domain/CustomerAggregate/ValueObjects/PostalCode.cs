@@ -27,7 +27,7 @@ namespace Validata.Domain.CustomerAggregate.ValueObjects
         public static PostalCode Create(string value)
         {
 
-            if (value.Length ==6 )
+            if (value.Length !=6 )
                 throw new Exception("Length of the Postal Code must be six character!");
 
 
