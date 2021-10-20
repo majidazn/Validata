@@ -8,5 +8,6 @@ namespace Validata.Domain.OrderAggregate.Repositories
 {
     public interface IOrderRepositoryQuery
     {
+        IQueryable<Domain.OrderAggregate.Entities.Order> GetOrders();
     }
 }

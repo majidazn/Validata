@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Validata.ApplicationServices.Customer.Commands.CreateCustomerCommand;
 using Validata.ApplicationServices.Customer.Commands.EditCustomerCommand;
 using Validata.ApplicationServices.Customer.Commands.RemoveCustomerCommand;
+using Validata.ApplicationServices.Customer.Queries;
+using Validata.Common.Dtos;
+using Validata.Domain.CustomerAggregate.Dtos;
 
 namespace Validata.WebApi.Controllers
 {
@@ -52,6 +55,9 @@ namespace Validata.WebApi.Controllers
 
 
 
+        [HttpPost]
+        public async Task<ActionResult<GridResultDto<CustomerResultSearchDto>>> SearchCenter(SearcCustomerhDto dto)
+            => Ok(await _mediator.Send(new CustomerSearchQuery() { SearchDto = dto }));
 
         #endregion
     }

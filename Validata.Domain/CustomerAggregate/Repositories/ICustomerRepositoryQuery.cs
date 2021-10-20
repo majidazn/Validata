@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Validata.Domain.CustomerAggregate.Repositories
 {
-  public  interface ICustomerRepositoryQuery
+    public interface ICustomerRepositoryQuery
     {
+        IQueryable<Domain.CustomerAggregate.Entities.Customer> GetCustomers();
     }
 }

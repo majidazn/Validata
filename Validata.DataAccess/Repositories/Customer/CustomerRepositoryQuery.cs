@@ -21,7 +21,13 @@ namespace Validata.DataAccess.Repositories.Customer
         #endregion
 
         #region Methods
+        public IQueryable<Domain.CustomerAggregate.Entities.Customer> GetCustomers()
+        {
+            var customer = from x in _context.Customers
+                          select x;
 
+            return customer;
+        }
         #endregion
     }
 }
