@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Validata.Common.Domain.SeedWork;
 using Validata.Common.Enums;
+using Validata.Domain.OrderAggregate.DomainServices;
 using Validata.Domain.OrderAggregate.Dtos;
 using Validata.Domain.OrderAggregate.ValueObjects;
 
@@ -44,34 +45,49 @@ namespace Validata.Domain.OrderAggregate.Entities
 
         #region Behaviors
 
-        public static async Task<Order> Create(int customerId,  decimal totalPrice, List<CreateOrderItemDto> orderItems)
+        public static async Task<Order> Create(IOrderDomainServices orderDomainServices, int customerId,   List<CreateOrderItemDto> orderItems)
         {
             EnforceInvariantsCreate(customerId);
-            var customer = new Order(customerId, DateTime.Now, totalPrice);
+            var productIds = orderItems.Select(s => s.ProductId).ToList();
+
+            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(productIds);
+
+
+            var customer = new Order(customerId, DateTime.Now, totalPriceCal);
 
            
             customer.AddOrderItems(orderItems);
+
+
+
             return customer;
         }
 
-        public void EditOrder( decimal totalPrice, List<CreateOrderItemDto> orderItems)
+        public async Task EditOrder(IOrderDomainServices orderDomainServices, List<CreateOrderItemDto> orderItems)
         {
-          
+            var productIds = orderItems.Select(s => s.ProductId).ToList();
+
+            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(productIds);
+
+
 
             OrderDate = DateTime.Now;
-            TotalPrice = TotalPrice.Create(totalPrice);
+            TotalPrice = TotalPrice.Create(totalPriceCal);
             EditOrderItems(orderItems);
 
         }
 
-        public void RemoveOrder(int orderId)
+        public void RemoveOrder()
         {
 
 
             Status = EntityStateType.Deleted;
         }
 
-
+        private decimal CalculateTotalPrce()
+        {
+            return 0;
+        }
 
         private static void EnforceInvariantsCreate(int customerId)
         {

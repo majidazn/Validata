@@ -25,13 +25,13 @@ namespace Validata.ApplicationServices.Customer.Commands.RemoveCustomerCommand
             _customerRepositoryCommand = customerRepositoryCommand;
             _unitOfWork = unitOfWork;
         }
-
+        #endregion
         public async Task<bool> Handle(RemoveCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = await _customerRepositoryCommand.GetCustomerById(request.CustomerId, cancellationToken);
             customer.RemoveCustomer();
             return (await _unitOfWork.CompleteAsync()) > 0;
         }
-        #endregion
+      
     }
 }
