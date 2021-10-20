@@ -56,7 +56,7 @@ namespace Validata.ApplicationServices.Order.Services
                 });
             }
 
-            return orderList;
+            return orderList.OrderByDescending(o=>o.OrderDate).ToList();
 
         }
     }

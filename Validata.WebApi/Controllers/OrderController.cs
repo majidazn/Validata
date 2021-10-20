@@ -8,26 +8,29 @@ using System.Threading.Tasks;
 using Validata.ApplicationServices.Order.Commands.CreateOrderCommand;
 using Validata.ApplicationServices.Order.Commands.EditOrderCommand;
 using Validata.ApplicationServices.Order.Commands.RemoveOrderCommand;
+using Validata.ApplicationServices.Order.Services;
 
 namespace Validata.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController :  ControllerBase
+    public class OrderController : ControllerBase
     {
 
         #region Fields
 
         private readonly IMediator _mediator;
+        private readonly IOrderService _orderService;
 
 
         #endregion
         #region Constructor
 
-        public OrderController(IMediator mediator
+        public OrderController(IMediator mediator, IOrderService orderService
            )
         {
             _mediator = mediator;
+            _orderService = orderService;
 
         }
 
@@ -47,6 +50,10 @@ namespace Validata.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveOrder(RemoveOrderCommand removeOrderCommand, CancellationToken cancellationToken = default)
              => Ok(await _mediator.Send(removeOrderCommand, cancellationToken));
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+             => Ok(await _orderService.GetOrders());
 
 
         #endregion
