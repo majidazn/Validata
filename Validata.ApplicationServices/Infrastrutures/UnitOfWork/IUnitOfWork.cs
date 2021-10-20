@@ -14,6 +14,6 @@ namespace Validata.ApplicationServices.Infrastrutures.UnitOfWork
         IOrderRepositoryCommand Order { get; }
         IProductRepositoryCommand Product { get; }
 
-        Task CompleteAsync();
+        Task<int> CompleteAsync();
     }
 }

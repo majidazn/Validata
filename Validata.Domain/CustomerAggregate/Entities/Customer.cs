@@ -66,7 +66,7 @@ namespace Validata.Domain.CustomerAggregate.Entities
             PostalCode = PostalCode.Create(postalCode);
         }
 
-        public void RemoveCustomer(int customerId)
+        public void RemoveCustomer()
         {
            
 

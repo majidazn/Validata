@@ -20,12 +20,13 @@ namespace Validata.ApplicationServices.Customer.Commands.CreateCustomerCommand
 
         #endregion
 
+        #region Constructors
         public CreateCustomerCommandHandler(ICustomerRepositoryCommand customerRepositoryCommand, IUnitOfWork unitOfWork)
         {
             _customerRepositoryCommand = customerRepositoryCommand;
             _unitOfWork = unitOfWork;
         }
-
+        #endregion
         public async Task<long> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = await Domain.CustomerAggregate.Entities.Customer.Create(

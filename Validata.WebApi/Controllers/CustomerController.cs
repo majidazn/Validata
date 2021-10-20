@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Validata.ApplicationServices.Customer.Commands.CreateCustomerCommand;
+using Validata.ApplicationServices.Customer.Commands.EditCustomerCommand;
+using Validata.ApplicationServices.Customer.Commands.RemoveCustomerCommand;
 
 namespace Validata.WebApi.Controllers
 {
@@ -37,6 +39,19 @@ namespace Validata.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer(CreateCustomerCommand createCustomerCommand, CancellationToken cancellationToken = default)
              => Ok(await _mediator.Send(createCustomerCommand, cancellationToken));
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditCustomer(EditCustomerCommand editCustomerCommand, CancellationToken cancellationToken = default)
+            => Ok(await _mediator.Send(editCustomerCommand, cancellationToken));
+
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveCustomer(RemoveCustomerCommand removeCustomerCommand, CancellationToken cancellationToken = default)
+            => Ok(await _mediator.Send(removeCustomerCommand, cancellationToken));
+
+
+
 
         #endregion
     }

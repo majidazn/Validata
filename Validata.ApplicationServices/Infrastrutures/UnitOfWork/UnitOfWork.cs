@@ -32,9 +32,9 @@ namespace Validata.ApplicationServices.Infrastrutures.UnitOfWork
             Customer = new CustomerRepositoryCommand(context, httpContextAccessor);
         }
 
-        public async Task CompleteAsync()
+        public async Task<int> CompleteAsync()
         {
-            await _context.SaveChangesAsync();
+           return await _context.SaveChangesAsync();
         }
 
         public void Dispose()
