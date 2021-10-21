@@ -15,7 +15,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Validata.ApplicationServices.Infrastrutures;
 using Validata.ApplicationServices.Infrastrutures.UnitOfWork;
+using Validata.ApplicationServices.Order.DomainServices;
 using Validata.ApplicationServices.Order.Services;
+using Validata.Domain.OrderAggregate.DomainServices;
 using Validata.WebApi.Framework.Configuration;
 using Validata.WebApi.Framework.Extensions;
 using Validata.WebApi.Framework.Infrastrutures;
@@ -43,6 +45,7 @@ namespace Validata.WebApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.SwaggerSetup();
             services.AddScoped<IOrderService, OrderService>();
+           
 
 
         }

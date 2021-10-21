@@ -8,6 +8,7 @@ using Validata.Common.Enums;
 using Validata.Domain.OrderAggregate.DomainServices;
 using Validata.Domain.OrderAggregate.Dtos;
 using Validata.Domain.OrderAggregate.ValueObjects;
+using Validata.Domain.ProductAggregate.Dtos;
 
 namespace Validata.Domain.OrderAggregate.Entities
 {
@@ -48,9 +49,16 @@ namespace Validata.Domain.OrderAggregate.Entities
         public static async Task<Order> Create(IOrderDomainServices orderDomainServices, int customerId,   List<CreateOrderItemDto> orderItems)
         {
             EnforceInvariantsCreate(customerId);
-            var productIds = orderItems.Select(s => s.ProductId).ToList();
+            var products = orderItems.Select(s=> new ProductDto { 
+            Id= s.ProductId,
+            Quantity=s.Quantity
+            }).ToList();
 
-            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(productIds);
+
+
+
+
+            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(products);
 
 
             var customer = new Order(customerId, DateTime.Now, totalPriceCal);
@@ -65,9 +73,13 @@ namespace Validata.Domain.OrderAggregate.Entities
 
         public async Task EditOrder(IOrderDomainServices orderDomainServices, List<CreateOrderItemDto> orderItems)
         {
-            var productIds = orderItems.Select(s => s.ProductId).ToList();
+            var products = orderItems.Select(s => new ProductDto
+            {
+                Id = s.ProductId,
+                Quantity = s.Quantity
+            }).ToList();
 
-            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(productIds);
+            var totalPriceCal = await orderDomainServices.GetProductsTotalPrice(products);
 
 
 
@@ -100,7 +112,7 @@ namespace Validata.Domain.OrderAggregate.Entities
         private void AddOrderItems(List<CreateOrderItemDto> orderItems)
         {
             foreach (var orderItem in orderItems)
-                _orderItems.Add(OrderItem.Create(orderItem.ProductId,orderItem.Quantity,orderItem.OrderId));
+                _orderItems.Add(OrderItem.Create(orderItem.ProductId,orderItem.Quantity));
         }
 
         private void EditOrderItems(List<CreateOrderItemDto> orderItems)
@@ -116,7 +128,7 @@ namespace Validata.Domain.OrderAggregate.Entities
             }
 
             foreach (var orderItem in orderItems.Where(t => t.Id == 0))
-                _orderItems.Add(OrderItem.Create(orderItem.ProductId, orderItem.Quantity, orderItem.OrderId));
+                _orderItems.Add(OrderItem.Create(orderItem.ProductId, orderItem.Quantity));
         }
 
 

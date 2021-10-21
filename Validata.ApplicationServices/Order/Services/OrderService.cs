@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Validata.Domain.CustomerAggregate.Repositories;
 using Validata.Domain.OrderAggregate.Dtos;
 using Validata.Domain.OrderAggregate.Repositories;
 using Validata.Domain.ProductAggregate.Repositories;
@@ -13,13 +12,17 @@ namespace Validata.ApplicationServices.Order.Services
     {
         private readonly IOrderRepositoryQuery _orderRepositoryQuery;
         private readonly IProductRepositoryQuery _productRepositoryQuery;
+        private readonly ICustomerRepositoryQuery _customerRepositoryQuery;
 
 
-        public OrderService(IOrderRepositoryQuery orderRepositoryQuery, IProductRepositoryQuery productRepositoryQuery)
+        public OrderService(IOrderRepositoryQuery orderRepositoryQuery, IProductRepositoryQuery productRepositoryQuery,
+            ICustomerRepositoryQuery customerRepositoryQuery
+            )
 
         {
             _orderRepositoryQuery = orderRepositoryQuery;
             _productRepositoryQuery = productRepositoryQuery;
+            _customerRepositoryQuery = customerRepositoryQuery;
         }
 
 
@@ -31,6 +34,9 @@ namespace Validata.ApplicationServices.Order.Services
 
             var products =await _productRepositoryQuery.GetProductsByIds(productIds);
 
+            var customerIds= orders.Select(s=>s.CustomerId).ToList();
+            var customers = await _customerRepositoryQuery.GetCustomersByIds(customerIds);
+
 
             var orderList = new List<OrderResultSearchDto>();
 
@@ -41,9 +47,10 @@ namespace Validata.ApplicationServices.Order.Services
                 {
                     Id = item.Id,
                     CustomerId= item.CustomerId,
+                    CustomerFullName= customers.FirstOrDefault(q=>q.Id==item.CustomerId).FullName,
                     OrderDate= item.OrderDate,
                     TotalPrice= item.TotalPrice.Value,
-                    OrderItems= item.OrderItems.Select(s=>new CreateOrderItemDto() 
+                    OrderItems= item.OrderItems.Select(s=>new OrderItemDto() 
                     {
                         Id=s.Id,
                         OrderId=s.OrderId,

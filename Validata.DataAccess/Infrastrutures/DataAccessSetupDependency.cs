@@ -1,11 +1,7 @@
 ﻿using Autofac;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Validata.DataAccess.Context;
 
 namespace Validata.DataAccess.Infrastrutures
@@ -15,12 +11,9 @@ namespace Validata.DataAccess.Infrastrutures
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            //builder.RegisterAssemblyModules(typeof(ApplicationServiceSetupDependency).Assembly);
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //     .Where(x => x.Namespace.StartsWith("Validata.ApplicationServices.Infrastrutures"))
 
 
-          builder.RegisterAssemblyModules(Assembly.Load("Validata.ApplicationServices"));
+            builder.RegisterAssemblyModules(Assembly.Load("Validata.ApplicationServices"));
 
 
             builder.RegisterType<ECommerceBoundedContextCommand>().As<DbContext>().InstancePerLifetimeScope();

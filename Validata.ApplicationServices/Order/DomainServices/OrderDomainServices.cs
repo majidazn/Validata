@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Validata.Domain.OrderAggregate.DomainServices;
 using Validata.Domain.OrderAggregate.Repositories;
+using Validata.Domain.ProductAggregate.Dtos;
 
 namespace Validata.ApplicationServices.Order.DomainServices
 {
@@ -17,9 +18,9 @@ namespace Validata.ApplicationServices.Order.DomainServices
         {
             _orderRepositoryCommand = orderRepositoryCommand;
         }
-        public async Task<decimal> GetProductsTotalPrice(List<int> productIs)
+        public async Task<decimal> GetProductsTotalPrice(List<ProductDto> productDtos)
         {
-            return await _orderRepositoryCommand.GetProductsTotalPrice(productIs);
+            return await _orderRepositoryCommand.GetProductsTotalPrice(productDtos);
         }
     }
 }

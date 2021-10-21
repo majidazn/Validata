@@ -1,8 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Validata.ApplicationServices.Customer.Commands.CreateCustomerCommand;
@@ -15,7 +12,7 @@ using Validata.Domain.CustomerAggregate.Dtos;
 namespace Validata.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class CustomerController : ControllerBase
     {
 
@@ -56,7 +53,7 @@ namespace Validata.WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<GridResultDto<CustomerResultSearchDto>>> SearchCenter(SearcCustomerhDto dto)
+        public async Task<ActionResult<GridResultDto<CustomerResultSearchDto>>> SearchCustomer(SearcCustomerhDto dto)
             => Ok(await _mediator.Send(new CustomerSearchQuery() { SearchDto = dto }));
 
         #endregion

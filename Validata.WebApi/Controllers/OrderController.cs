@@ -1,8 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Validata.ApplicationServices.Order.Commands.CreateOrderCommand;
@@ -13,7 +10,7 @@ using Validata.ApplicationServices.Order.Services;
 namespace Validata.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class OrderController : ControllerBase
     {
 

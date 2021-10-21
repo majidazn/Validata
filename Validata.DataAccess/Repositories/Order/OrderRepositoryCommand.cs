@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Validata.Common.Repository;
 using Validata.DataAccess.Context;
 using Validata.Domain.OrderAggregate.Repositories;
+using Validata.Domain.ProductAggregate.Dtos;
 
 namespace Validata.DataAccess.Repositories.Order
 {
@@ -31,9 +32,21 @@ namespace Validata.DataAccess.Repositories.Order
         {
             return await _eCommerceBoundedContextCommand.Orders.FirstOrDefaultAsync(q => q.Id == orderId, cancellationToken);
         }
-        public async Task<decimal> GetProductsTotalPrice(List<int> productIs )
+        public async Task<decimal> GetProductsTotalPrice(List<ProductDto> productDtos)
         {
-            return await _eCommerceBoundedContextCommand.Products.Where(q => productIs.Contains(q.Id)).SumAsync(s => s.Price.Value);
+            var productIds = productDtos.Select(s => s.Id).ToList();
+
+            var products =await _eCommerceBoundedContextCommand.Products.Where(q => productIds.Contains(q.Id)).ToListAsync();
+
+            decimal totalPrice = 0;
+            foreach (var item in products)
+            {
+
+                var quantity = productDtos.FirstOrDefault(q=>q.Id== item.Id).Quantity;
+
+                totalPrice += (item.Price.Value * quantity);
+            }
+            return totalPrice;
         }
 
     }

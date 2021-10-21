@@ -8,6 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Validata.ApplicationServices.Customer.Commands.CreateCustomerCommand;
+using Validata.ApplicationServices.Order.DomainServices;
+using Validata.Common.Behaviors;
+using Validata.Domain.OrderAggregate.DomainServices;
 
 namespace Validata.ApplicationServices.Infrastrutures
 {
@@ -38,18 +41,15 @@ namespace Validata.ApplicationServices.Infrastrutures
                 .Where(t => t.IsClosedTypeOf(typeof(IValidator<>)))
                 .AsImplementedInterfaces();
 
+            builder.RegisterGeneric(typeof(ValidatorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
+            builder.RegisterGeneric(typeof(TransactionBehavior<,>)).As(typeof(IPipelineBehavior<,>));
 
 
-         
             #endregion
 
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(x => x.Namespace.StartsWith("Validata.ApplicationServices.CommonServices"))
-            //    .AsImplementedInterfaces()
-            //    .InstancePerLifetimeScope();
 
-           // builder.RegisterType<CenterDomainServices>().As<ICenterDomainServices>().InstancePerLifetimeScope();
-           // builder.RegisterType<CenterVariableDomainServices>().As<ICenterVariableDomainServices>().InstancePerLifetimeScope();
+
+            builder.RegisterType<OrderDomainServices>().As<IOrderDomainServices>().InstancePerLifetimeScope();
         }
     }
 }

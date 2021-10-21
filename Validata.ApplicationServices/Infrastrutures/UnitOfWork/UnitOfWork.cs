@@ -14,7 +14,7 @@ namespace Validata.ApplicationServices.Infrastrutures.UnitOfWork
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly ECommerceBoundedContextCommand _context;
-       // private readonly ILogger _logger;
+       
         private readonly IHttpContextAccessor _httpContextAccessor;
 
        public ICustomerRepositoryCommand Customer { get; private set; }
@@ -25,7 +25,7 @@ namespace Validata.ApplicationServices.Infrastrutures.UnitOfWork
         public UnitOfWork(ECommerceBoundedContextCommand context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-            //_logger = loggerFactory.CreateLogger("logs");
+           
 
           
             _httpContextAccessor = httpContextAccessor;

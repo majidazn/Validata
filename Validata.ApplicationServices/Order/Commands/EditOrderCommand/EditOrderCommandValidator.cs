@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
 namespace Validata.ApplicationServices.Order.Commands.EditOrderCommand
 {
-    class EditOrderCommandValidator
+   public class EditOrderCommandValidator : AbstractValidator<EditOrderCommand>
     {
+        public EditOrderCommandValidator()
+        {
+            RuleFor(i => i.EditOrderDto.Id).GreaterThan(0).WithMessage("OrderId is required !");
+
+        }
     }
 }

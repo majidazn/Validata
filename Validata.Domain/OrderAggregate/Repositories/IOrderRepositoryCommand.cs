@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Validata.Common.IRepository;
+using Validata.Domain.ProductAggregate.Dtos;
 
 namespace Validata.Domain.OrderAggregate.Repositories
 {
@@ -12,6 +13,6 @@ namespace Validata.Domain.OrderAggregate.Repositories
     {
         Task<Domain.OrderAggregate.Entities.Order> FetchOrderAggregate(long orderId, CancellationToken cancellationToken);
         Task<Domain.OrderAggregate.Entities.Order> GetOrderById(long orderId, CancellationToken cancellationToken);
-        Task<decimal> GetProductsTotalPrice(List<int> productIs);
+        Task<decimal> GetProductsTotalPrice(List<ProductDto> productDtos);
     }
 }

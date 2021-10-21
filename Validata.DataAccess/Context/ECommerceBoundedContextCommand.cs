@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Validata.Common.Enums;
 using Validata.DataAccess.Configurations.Customer;
 using Validata.DataAccess.Configurations.Order;
@@ -19,11 +14,10 @@ namespace Validata.DataAccess.Context
 
     public class ECommerceBoundedContextCommand : DbContext
     {
-        public ECommerceBoundedContextCommand(DbContextOptions<ECommerceBoundedContextCommand> options,
-         IHttpContextAccessor httpContextAccessor)
+        public ECommerceBoundedContextCommand(DbContextOptions<ECommerceBoundedContextCommand> options)
          : base(options)
         {
-            //this._httpContextAccessor = httpContextAccessor;
+          
         }
 
 

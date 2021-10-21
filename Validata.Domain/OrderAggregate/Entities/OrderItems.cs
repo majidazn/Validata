@@ -15,11 +15,10 @@ namespace Validata.Domain.OrderAggregate.Entities
         {
 
         }
-        private OrderItem(int productId, int quantity, int orderId)
+        private OrderItem(int productId, int quantity)
         {
             ProductId = productId;
             Quantity = quantity;
-            OrderId = orderId;
             Status = EntityStateType.Default;
         }
         #endregion
@@ -37,10 +36,10 @@ namespace Validata.Domain.OrderAggregate.Entities
 
 
         #region Behaviors
-        public static OrderItem Create(int productId, int quantity, int orderId)
+        public static OrderItem Create(int productId, int quantity)
         {
-            EnforceInvariantsCreate(productId, quantity, orderId);
-            return new OrderItem(productId, quantity, orderId);
+            EnforceInvariantsCreate(productId, quantity );
+            return new OrderItem(productId, quantity);
         }
         public void Edit(int productId, int quantity)
         {
@@ -52,7 +51,7 @@ namespace Validata.Domain.OrderAggregate.Entities
 
         }
         public void ChangeStatus(EntityStateType status) => this.Status = status;
-        private static void EnforceInvariantsCreate(int productId, int quantity, int orderId)
+        private static void EnforceInvariantsCreate(int productId, int quantity)
         {
             if (productId <= 0)
                 throw new Exception("ProductId is required!");
@@ -60,8 +59,6 @@ namespace Validata.Domain.OrderAggregate.Entities
             if (quantity <= 0)
                 throw new Exception("Quantity is required!");
 
-            if (orderId <= 0)
-                throw new Exception("OrderId is required!");
         }
         private static void EnforceInvariantsEdit(int productId, int quantity)
         {
